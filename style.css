@@ -1,0 +1,380 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.6;
+    padding: 20px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ===== MAIN CONTAINER ===== */
+#container {
+    display: flex;
+    height: 95vh;
+    gap: 30px;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* ===== EDITOR PANEL - WIDE ===== */
+#editor-panel {
+    width: 900px !important;
+    min-width: 900px !important;
+    max-width: 900px !important;
+    background: #1e293b;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+/* Branding Section */
+.branding {
+    text-align: center;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #111827 0%, #1e293b 100%);
+    border-bottom: 1px solid #334155;
+}
+
+.branding img {
+    width: 90px;
+    height: auto;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+
+.branding h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #e2e8f0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.branding p {
+    font-size: 13px;
+    color: #94a3b8;
+    margin: 8px 0 0 0;
+    font-weight: 500;
+}
+
+/* ===== CODE EDITOR - NO LINE BREAKS ===== */
+#code-editor {
+    flex: 1;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 30px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 15px;
+    border: none;
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+    tab-size: 4;
+    
+    /* CRITICAL: Prevent line wrapping */
+    white-space: pre !important;
+    overflow-x: auto !important;
+    word-wrap: normal !important;
+    word-break: keep-all !important;
+}
+
+/* Code editor scrollbar */
+#code-editor::-webkit-scrollbar {
+    height: 10px;
+}
+
+#code-editor::-webkit-scrollbar-track {
+    background: #1e293b;
+    border-radius: 5px;
+}
+
+#code-editor::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 5px;
+}
+
+#code-editor::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Controls */
+.controls {
+    padding: 20px;
+    background: #111827;
+    border-top: 1px solid #334155;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.control-btn {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.control-btn:hover {
+    background: linear-gradient(135deg, #334155 0%, #475569 100%);
+    border-color: #60a5fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== VISUALIZATION AREA ===== */
+#visualization {
+    flex: 1;
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    position: relative;
+    min-width: 800px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+#canvas-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== OVERLAY PANELS ===== */
+.overlay-panel {
+    position: absolute;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px;
+    color: #fff;
+    max-width: 320px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+#health-panel {
+    top: 20px;
+    left: 20px;
+    min-width: 250px;
+}
+
+#health-panel h4 {
+    color: #10b981;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.health-bar {
+    width: 100%;
+    height: 10px;
+    background: #334155;
+    border-radius: 5px;
+    margin: 12px 0;
+    overflow: hidden;
+}
+
+#health-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+}
+
+#analysis-panel {
+    bottom: 20px;
+    left: 20px;
+    min-width: 260px;
+}
+
+#analysis-panel h4 {
+    color: #f59e0b;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.metric {
+    margin: 10px 0;
+}
+
+.metric-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #cbd5e1;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    color: #e2e8f0;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+#error-panel {
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: rgba(239, 68, 68, 0.9);
+    border-color: #ef4444;
+}
+
+/* Loading Screen */
+#loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(15, 23, 42, 0.95);
+    padding: 30px 40px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    display: none;
+    z-index: 1000;
+    border: 1px solid #334155;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1600px) {
+    #container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    #editor-panel {
+        width: 100% !important;
+        min-width: 100% !important;
+        height: 600px;
+    }
+    
+    #visualization {
+        width: 100%;
+        min-width: auto;
+        height: 700px;
+    }
+    
+    .controls {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .controls {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .overlay-panel {
+        position: relative;
+        max-width: 100%;
+        margin: 10px 0;
+    }
+    
+    #health-panel,
+    #analysis-panel,
+    #error-panel {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin: 10px 0;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.health-pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.overlay-panel {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* ===== ERROR STATES ===== */
+.static-error { 
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid #ef4444;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 5px 0;
+}

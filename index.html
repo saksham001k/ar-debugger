@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Debugger - 3D Code Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
+</head>
+<body>
+    <div id="container">
+        <!-- Editor Panel -->
+        <div id="editor-panel">
+            <div class="branding">
+                <h2>🔧 AR Debugger</h2>
+                <p>Interactive 3D Code Visualization</p>
+            </div>
+            <textarea id="code-editor" placeholder="Enter Python code here...">def fibonacci(n):
+    """Calculate Fibonacci sequence"""
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+def main():
+    numbers = [1, 2, 3, 4, 5]
+    results = []
+    
+    for num in numbers:
+        fib = fibonacci(num)
+        results.append(fib)
+        print(f"Fibonacci({num}) = {fib}")
+    
+    total = sum(results)
+    print(f"Total: {total}")
+    return results
+
+if __name__ == "__main__":
+    main()</textarea>
+            <div class="controls">
+                <button id="update-visualization" class="control-btn">🔄 Update</button>
+                <button id="analyze-code" class="control-btn">📊 Analyze</button>
+                <button id="reset-view" class="control-btn">🎯 Reset View</button>
+                <button id="toggle-labels" class="control-btn">🏷️ Toggle Labels</button>
+                <button id="highlight-errors" class="control-btn">⚠️ Highlight Errors</button>
+                <button id="screenshot" class="control-btn">📸 Screenshot</button>
+            </div>
+        </div>
+        
+        <!-- Visualization Area -->
+        <div id="visualization">
+            <div id="canvas-container"></div>
+            
+            <!-- Overlay Panels -->
+            <div id="health-panel" class="overlay-panel">
+                <h4>📊 Code Health</h4>
+                <div class="health-bar">
+                    <div id="health-fill"></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Score: <span id="health-value">100</span>/100</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Complexity: <span id="complexity-value">0</span></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Coverage: <span id="coverage-value">100%</span></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Functions: <span id="function-value">0</span></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Errors: <span id="error-value">0</span></div>
+                </div>
+            </div>
+            
+            <div id="analysis-panel" class="overlay-panel">
+                <h4>📈 Analysis</h4>
+                <div id="analysis-stats"></div>
+            </div>
+            
+            <div id="error-panel" class="overlay-panel">
+                <span id="error-count">0 Errors</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Screen -->
+    <div id="loading">🔄 Analyzing code...</div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
