@@ -4,27 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR Debugger - 3D Code Visualization</title>
+    
+    <!-- FIXED: THREE.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    
+    <!-- FIXED: CSS path -->
     <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
 </head>
 <body>
     <div id="container">
         <div id="editor-panel">
             <div class="branding">
-                <h2>🔧 AR Debugger</h2>
-                <p>Interactive 3D Code Visualization</p>
+                <img src="pic.png" alt="Logo" width="90">
+                <h2>AR Debugger</h2>
+                <p>3D Visualization & Code Analysis</p>
             </div>
-            <textarea id="code-editor" placeholder="Enter Python code here...">def hello():
-    print("Hello World!")
-    return "Success"
+            <textarea id="code-editor" placeholder="Enter your Python code here...">def add_numbers(a, b):
+    result = a + b
+    return result
 
-result = hello()
-print(result)</textarea>
+def multiply(x, y):
+    product = x * y
+    print(product)
+    return product
+
+def main():
+    sum = add_numbers(5, 3)
+    mult = multiply(sum, 2)
+    print(mult)</textarea>
             <div class="controls">
                 <button id="update-visualization" class="control-btn">🔄 Update</button>
-                <button id="analyze-code" class="control-btn">📊 Analyze</button>
                 <button id="reset-view" class="control-btn">🎯 Reset View</button>
                 <button id="toggle-labels" class="control-btn">🏷️ Labels</button>
                 <button id="highlight-errors" class="control-btn">⚠️ Errors</button>
@@ -38,11 +48,21 @@ print(result)</textarea>
             <div id="health-panel" class="overlay-panel">
                 <h4>📊 Code Health</h4>
                 <div class="health-bar"><div id="health-fill"></div></div>
-                <div class="metric">Score: <span id="health-value">100</span>/100</div>
-                <div class="metric">Complexity: <span id="complexity-value">0</span></div>
-                <div class="metric">Coverage: <span id="coverage-value">100%</span></div>
-                <div class="metric">Functions: <span id="function-value">0</span></div>
-                <div class="metric">Errors: <span id="error-value">0</span></div>
+                <div class="metric">
+                    <div class="metric-label">Score: <span id="health-value">100</span>/100</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Complexity: <span id="complexity-value">0</span></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Coverage: <span id="coverage-value">100%</span></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Functions: <span id="function-value">0</span></div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">Errors: <span id="error-value">0</span></div>
+                </div>
             </div>
             
             <div id="analysis-panel" class="overlay-panel">
@@ -58,7 +78,7 @@ print(result)</textarea>
     
     <div id="loading">🔄 Analyzing code...</div>
     
+    <!-- FIXED: JavaScript path -->
     <script src="./script.js"></script>
 </body>
 </html>
-
