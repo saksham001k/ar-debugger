@@ -1,4 +1,5 @@
-# AR Debugger - Live Code Visualization
+#LogiBloom 
+#AR Debugger - Live Code Visualization
 
 A powerful 3D visualization tool that transforms Python code into interactive graphs, making debugging intuitive and visually engaging.
 
@@ -87,5 +88,6 @@ print(c)
 
 def s(x,y):
     return x+y
+
 
 print(s(10,89))
